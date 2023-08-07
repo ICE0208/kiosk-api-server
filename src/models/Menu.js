@@ -1,10 +1,13 @@
 import mongoose from "mongoose";
 
 const menuSchema = new mongoose.Schema({
-  owner: { type: String, required: true },
-  name: { type: String, required: true },
+  owner: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  name: { type: String, required: true, unique: true },
+  text: { type: String, required: true },
   price: { type: Number, required: true },
   imageURL: { type: String, required: true },
+  category1: { type: String, required: true },
+  category2: { type: String, required: true },
 });
 
 const Menu = mongoose.model("Menu", menuSchema);
