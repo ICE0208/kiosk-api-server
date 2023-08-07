@@ -3,6 +3,53 @@ import { getVerifiedUser } from "./userController";
 import Menu from "../models/Menu";
 import User from "../models/User";
 
+export const getCategoryMenu = async (req, res) => {
+  const { id, password } = req.body;
+  const { category1, category2 } = req.body;
+  const verifiedUser = await getVerifiedUser(id, password);
+  if (!verifiedUser) {
+    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+  }
+
+  const popuUser = await User.findOne({ id }).populate("menus");
+  let menuList = popuUser.menus;
+  if (category1) {
+    menuList = menuList.filter((menu) => {
+      return String(menu.category1) === String(category1);
+    });
+  }
+  if (category2) {
+    menuList = menuList.filter((menu) => {
+      return String(menu.category2) === String(category2);
+    });
+  }
+  return res.status(200).json({ ok: true, data: { menus: menuList } });
+};
+
+export const getNameMenu = async (req, res) => {
+  const { id, password } = req.body;
+  const { name } = req.body;
+  const verifiedUser = await getVerifiedUser(id, password);
+  if (!verifiedUser) {
+    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+  }
+
+  const popuUser = await User.findOne({ id }).populate("menus");
+  let menuList = popuUser.menus;
+
+  menuList = menuList.filter((menu) => {
+    return String(menu.name) === String(name);
+  });
+
+  if (menuList.length > 0) {
+    return res.status(200).json({ ok: true, data: { menu: menuList[0] } });
+  } else {
+    return res
+      .status(400)
+      .json({ ok: false, msg: "there is not this name's menu." });
+  }
+};
+
 export const getAllMenu = async (req, res) => {
   const { id, password } = req.body;
   const verifiedUser = await getVerifiedUser(id, password);
@@ -22,6 +69,17 @@ export const addMenu = async (req, res) => {
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
     return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+  }
+
+  const popuUser = await User.findOne({ id }).populate("menus");
+  let menuList = popuUser.menus;
+  menuList = menuList.filter((menu) => {
+    return String(menu.name) === String(name);
+  });
+  if (menuList.length > 0) {
+    return res
+      .status(400)
+      .json({ ok: false, msg: "There is already this name's menu." });
   }
 
   try {
@@ -45,12 +103,10 @@ export const addMenu = async (req, res) => {
 export const removeMenu = async (req, res) => {
   const { id, password } = req.body;
   const { name } = req.body;
-
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
     return res.status(400).json({ ok: false, msg: "wrong id or pw" });
   }
-
   try {
     let menu = await Menu.findOne({ name });
     if (!menu) {
@@ -58,16 +114,13 @@ export const removeMenu = async (req, res) => {
     }
     menu = await Menu.findOne({ name }).populate("owner");
     console.log(menu);
-
     const menuId = menu._id;
-
     menu.owner.menus = menu.owner.menus.filter((_id) => {
       console.log(_id);
       return String(_id) != String(menuId);
     });
     await menu.owner.save();
     await Menu.findByIdAndDelete(menuId);
-
     return res.status(200).json({ ok: true, msg: "good" });
   } catch (error) {
     return res.status(400).json({ ok: false, msg: "error" });

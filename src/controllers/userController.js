@@ -11,7 +11,7 @@ export const register = async (req, res) => {
     });
     return res.json({ ok: true, msg: "good" });
   } catch (err) {
-    return res.json({ ok: false, msg: "error", err });
+    return res.json({ ok: false, msg: `error: ${err}` });
   }
 };
 
