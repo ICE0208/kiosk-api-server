@@ -113,7 +113,6 @@ export const removeMenu = async (req, res) => {
       return res.status(400).json({ ok: false, msg: "no menu" });
     }
     menu = await Menu.findOne({ name }).populate("owner");
-    console.log(menu);
     const menuId = menu._id;
     menu.owner.menus = menu.owner.menus.filter((_id) => {
       console.log(_id);

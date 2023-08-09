@@ -12,8 +12,8 @@ const menuRouter = express.Router();
 menuRouter.post("/add", addMenu);
 menuRouter.post("/remove", removeMenu);
 
-menuRouter.get("/category", getCategoryMenu);
-menuRouter.get("/name", getNameMenu);
-menuRouter.get("/", getAllMenu);
+menuRouter.post("/category", getCategoryMenu);
+menuRouter.post("/name", getNameMenu);
+menuRouter.post("/", getAllMenu);
 
 export default menuRouter;
