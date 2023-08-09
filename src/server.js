@@ -11,21 +11,16 @@ const app = express();
 
 app.use(cors());
 // "combined" 형식으로 로깅을 설정하고 한국 시간대로 시간을 포함시킵니다.
-morgan.token("date", (req, res, tz) => {
-  return moment().tz(tz).format("YYYY-MM-DD HH:mm:ss");
-});
-
 app.use(
-  morgan("combined", {
-    immediate: true,
-    stream: {
-      write: (message) => {
-        console.log(message);
-      },
-    },
-    format: ":date[Asia/Seoul] :method :url :status :response-time ms",
+  morgan((tokens, req, res) => {
+    const koreaTime = moment().tz("Asia/Seoul").format("YYYY-MM-DD HH:mm:ss");
+    return `${koreaTime} ${tokens.method(req, res)} ${tokens.url(
+      req,
+      res
+    )} ${tokens.status(req, res)} ${tokens["response-time"](req, res)} ms`;
   })
 );
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
