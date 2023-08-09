@@ -58,7 +58,6 @@ export const getAllMenu = async (req, res) => {
   }
 
   const popuUser = await User.findOne({ id }).populate("menus");
-  console.log(popuUser);
   return res.status(200).json({ ok: true, data: { menus: popuUser.menus } });
 };
 

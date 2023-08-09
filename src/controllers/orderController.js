@@ -55,7 +55,6 @@ export const removeOrder = async (req, res) => {
     }
     order = await Order.findOne({ _id: orderId }).populate("owner");
     order.owner.orders = order.owner.orders.filter((_id) => {
-      console.log(_id);
       return String(_id) !== String(orderId);
     });
     await order.owner.save();
