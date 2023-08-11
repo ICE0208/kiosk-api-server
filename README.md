@@ -160,6 +160,22 @@
 
 <p align="right"><a href="#top">⬆️Top</a><
 
+## 주문 상태 변경 /order/changeStatus [`POST`]
+
+### Request
+
+- `id`: String
+- `password`: String
+- `orderId`: String
+- `status`: Number
+
+### Response
+
+- `ok`: Boolean
+- `msg`: String
+
+<p align="right"><a href="#top">⬆️Top</a></p>
+
 ## 모든 주문 리스트 얻기 /order [`POST`]
 
 ### Request
