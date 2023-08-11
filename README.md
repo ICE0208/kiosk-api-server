@@ -1,8 +1,13 @@
-# kiosk-api-server API
+# <span id="top"> kiosk-api-server API 🎵</span>
+
+## <span>📍 목차 </span>
+
+[👤 유저 관련](#user)<br>
+[📜 메뉴 관련](#menu)<br>
 
 ---
 
-# 유저 관련
+# <span id="user">👤 유저 관련</span>
 
 ## 회원가입 /user/register [`POST`]
 
@@ -16,6 +21,8 @@
 - `ok`: Boolean
 - `msg`: String
 
+<p align="right"><a href="#top">⬆️Top</a></p>
+
 ## 로그인 /user/login [`POST`]
 
 ### Request
@@ -28,9 +35,11 @@
 - `ok`: Boolean
 - `msg`: String
 
+<p align="right"><a href="#top">⬆️Top</a></p>
+
 ---
 
-# 메뉴 관련
+# <span id="menu">📜 메뉴 관련</span>
 
 ## 메뉴 추가 /menu/add [`POST`]
 
@@ -50,6 +59,8 @@
 - `ok`: Boolean
 - `msg`: String
 
+<p align="right"><a href="#top">⬆️Top</a></p>
+
 ## 메뉴 삭제 /menu/remove [`POST`]
 
 ### Request
@@ -63,6 +74,8 @@
 - `ok`: Boolean
 - `msg`: String
 
+<p align="right"><a href="#top">⬆️Top</a></p>
+
 ## 모든 메뉴 리스트 얻기 /menu [`GET`]
 
 ### Request
@@ -74,6 +87,8 @@
 
 - `ok`: Boolean
 - `data`: { `menus`: [ menu1, menu2, ... ] }
+
+<p align="right"><a href="#top">⬆️Top</a></p>
 
 ## 카테고리로 메뉴 리스트 얻기 /menu/category [`GET`]
 
@@ -89,6 +104,8 @@
 - `ok`: Boolean
 - `data`: { `menus`: [ menu1, menu2, ... ] }
 
+<p align="right"><a href="#top">⬆️Top</a></p>
+
 ## 이름으로 메뉴 정보 얻기 /menu/name [`GET`]
 
 ### Request
@@ -101,3 +118,5 @@
 
 - `ok`: Boolean
 - `data`: { `menus`: [ menu1, menu2, ... ] }
+
+<p align="right"><a href="#top">⬆️Top</a></p>
