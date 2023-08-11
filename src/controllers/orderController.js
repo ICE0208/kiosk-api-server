@@ -49,9 +49,15 @@ export const removeOrder = async (req, res) => {
   }
 
   try {
+    if (!verifiedUser.orders.includes(orderId)) {
+      return res
+        .status(400)
+        .json({ ok: false, msg: "can't find this id in this account" });
+    }
+
     let order = await Order.findOne({ _id: orderId });
     if (!order) {
-      return res.status(400).json({ ok: false, msg: "can't find by this id" });
+      return res.status(400).json({ ok: false, msg: "can't find this id" });
     }
     order = await Order.findOne({ _id: orderId }).populate("owner");
     order.owner.orders = order.owner.orders.filter((_id) => {
