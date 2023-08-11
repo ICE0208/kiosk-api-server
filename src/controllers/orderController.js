@@ -69,7 +69,9 @@ export const getAllOrder = async (req, res) => {
   const { id, password } = req.body;
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
-    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+    return res
+      .status(400)
+      .json({ ok: false, msg: "wrong id or pw", data: { orders: [] } });
   }
 
   const popuUser = await User.findOne({ id })
@@ -80,5 +82,7 @@ export const getAllOrder = async (req, res) => {
       },
     })
     .exec();
-  return res.status(200).json({ ok: true, data: { orders: popuUser.orders } });
+  return res
+    .status(200)
+    .json({ ok: true, msg: "good", data: { orders: popuUser.orders } });
 };

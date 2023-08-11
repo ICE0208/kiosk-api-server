@@ -8,7 +8,9 @@ export const getCategoryMenu = async (req, res) => {
   const { category1, category2 } = req.body;
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
-    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+    return res
+      .status(400)
+      .json({ ok: false, msg: "wrong id or pw", data: { menus: [] } });
   }
 
   const popuUser = await User.findOne({ id }).populate("menus");
@@ -23,7 +25,9 @@ export const getCategoryMenu = async (req, res) => {
       return String(menu.category2) === String(category2);
     });
   }
-  return res.status(200).json({ ok: true, data: { menus: menuList } });
+  return res
+    .status(200)
+    .json({ ok: true, msg: "good", data: { menus: menuList } });
 };
 
 export const getNameMenu = async (req, res) => {
@@ -31,7 +35,9 @@ export const getNameMenu = async (req, res) => {
   const { name } = req.body;
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
-    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+    return res
+      .status(400)
+      .json({ ok: false, msg: "wrong id or pw", data: { menus: [] } });
   }
 
   const popuUser = await User.findOne({ id }).populate("menus");
@@ -42,11 +48,15 @@ export const getNameMenu = async (req, res) => {
   });
 
   if (menuList.length > 0) {
-    return res.status(200).json({ ok: true, data: { menu: menuList[0] } });
-  } else {
     return res
-      .status(400)
-      .json({ ok: false, msg: "there is not this name's menu." });
+      .status(200)
+      .json({ ok: true, msg: "good", data: { menu: menuList[0] } });
+  } else {
+    return res.status(400).json({
+      ok: false,
+      msg: "there is not this name's menu.",
+      data: { menu: null },
+    });
   }
 };
 
@@ -54,11 +64,15 @@ export const getAllMenu = async (req, res) => {
   const { id, password } = req.body;
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
-    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+    return res
+      .status(400)
+      .json({ ok: false, msg: "wrong id or pw", data: { menus: [] } });
   }
 
   const popuUser = await User.findOne({ id }).populate("menus");
-  return res.status(200).json({ ok: true, data: { menus: popuUser.menus } });
+  return res
+    .status(200)
+    .json({ ok: true, msg: "good", data: { menus: popuUser.menus } });
 };
 
 export const addMenu = async (req, res) => {
