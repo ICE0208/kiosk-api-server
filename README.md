@@ -4,6 +4,7 @@
 
 [👤 유저 관련](#user)<br>
 [📜 메뉴 관련](#menu)<br>
+[🔔 주문 관련](#order)<br>
 
 ---
 
@@ -86,6 +87,7 @@
 ### Response
 
 - `ok`: Boolean
+- `msg`: String
 - `data`: { `menus`: [ menu1, menu2, ... ] }
 
 <p align="right"><a href="#top">⬆️Top</a></p>
@@ -102,6 +104,7 @@
 ### Response
 
 - `ok`: Boolean
+- `msg`: String
 - `data`: { `menus`: [ menu1, menu2, ... ] }
 
 <p align="right"><a href="#top">⬆️Top</a></p>
@@ -117,6 +120,57 @@
 ### Response
 
 - `ok`: Boolean
+- `msg`: String
 - `data`: { `menus`: [ menu1, menu2, ... ] }
+
+<p align="right"><a href="#top">⬆️Top</a></p>
+
+---
+
+# <span id="order"> 🔔 주문 관련</span>
+
+## 주문 추가 /order/add [`POST`]
+
+### Request
+
+- `id`: String
+- `password`: String
+- `name`: String
+- `tableNum`: Number
+
+### Response
+
+- `ok`: Boolean
+- `msg`: String
+
+<p align="right"><a href="#top">⬆️Top</a></p>
+
+## 주문 삭제 /order/remove [`POST`]
+
+### Request
+
+- `id`: String
+- `password`: String
+- `orderId`: String
+
+### Response
+
+- `ok`: Boolean
+- `msg`: String
+
+<p align="right"><a href="#top">⬆️Top</a><
+
+## 모든 주문 리스트 얻기 /order [`POST`]
+
+### Request
+
+- `id`: String
+- `password`: String
+
+### Response
+
+- `ok`: Boolean
+- `msg`: String
+- `data`: { `orders`: [ order1, order2, ... ] }
 
 <p align="right"><a href="#top">⬆️Top</a></p>
