@@ -77,7 +77,7 @@
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## 모든 메뉴 리스트 얻기 /menu [`GET`]
+## 모든 메뉴 리스트 얻기 /menu [`POST`]
 
 ### Request
 
@@ -92,7 +92,7 @@
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## 카테고리로 메뉴 리스트 얻기 /menu/category [`GET`]
+## 카테고리로 메뉴 리스트 얻기 /menu/category [`POST`]
 
 ### Request
 
@@ -109,7 +109,7 @@
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-## 이름으로 메뉴 정보 얻기 /menu/name [`GET`]
+## 이름으로 메뉴 정보 얻기 /menu/name [`POST`]
 
 ### Request
 
