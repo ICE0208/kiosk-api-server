@@ -92,3 +92,39 @@ export const getAllOrder = async (req, res) => {
     .status(200)
     .json({ ok: true, msg: "good", data: { orders: popuUser.orders } });
 };
+
+export const changeOrderStatus = async (req, res) => {
+  const { id, password } = req.body;
+  const { orderId, status } = req.body;
+
+  if (status !== -1 && status !== 0 && status !== 1) {
+    return res
+      .status(400)
+      .json({ ok: false, msg: "Status can only be one of -1, 0, 1" });
+  }
+
+  const verifiedUser = await getVerifiedUser(id, password);
+  if (!verifiedUser) {
+    return res.status(400).json({ ok: false, msg: "wrong id or pw" });
+  }
+
+  try {
+    if (!verifiedUser.orders.includes(orderId)) {
+      return res
+        .status(400)
+        .json({ ok: false, msg: "can't find this id in this account" });
+    }
+
+    let order = await Order.findOne({ _id: orderId });
+    if (!order) {
+      return res.status(400).json({ ok: false, msg: "can't find this id" });
+    }
+
+    order.status = status;
+    await order.save();
+
+    return res.status(200).json({ ok: true, msg: "good" });
+  } catch (error) {
+    return res.status(400).json({ ok: false, msg: error });
+  }
+};
