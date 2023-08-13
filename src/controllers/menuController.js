@@ -5,7 +5,7 @@ import User from "../models/User";
 
 export const getCategoryMenu = async (req, res) => {
   const { id, password } = req.body;
-  const { category1, category2 } = req.body;
+  const { category1 } = req.body;
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
     return res
@@ -20,11 +20,7 @@ export const getCategoryMenu = async (req, res) => {
       return String(menu.category1) === String(category1);
     });
   }
-  if (category2) {
-    menuList = menuList.filter((menu) => {
-      return String(menu.category2) === String(category2);
-    });
-  }
+
   return res
     .status(200)
     .json({ ok: true, msg: "good", data: { menus: menuList } });
@@ -77,7 +73,7 @@ export const getAllMenu = async (req, res) => {
 
 export const addMenu = async (req, res) => {
   const { id, password } = req.body;
-  const { name, text, price, imageURL, category1, category2 } = req.body;
+  const { name, text, price, imageURL, category1 } = req.body;
 
   const verifiedUser = await getVerifiedUser(id, password);
   if (!verifiedUser) {
@@ -103,7 +99,6 @@ export const addMenu = async (req, res) => {
       price,
       imageURL,
       category1,
-      category2,
     });
     await verifiedUser.menus.push(menu._id);
     await verifiedUser.save();

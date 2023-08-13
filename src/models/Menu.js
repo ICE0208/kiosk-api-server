@@ -7,7 +7,6 @@ const menuSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   imageURL: { type: String, required: true },
   category1: { type: String, required: true },
-  category2: { type: String, required: true },
 });
 
 const Menu = mongoose.model("Menu", menuSchema);
