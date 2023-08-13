@@ -53,7 +53,6 @@
 - `price`: Number
 - `imageURL`: String
 - `category1`: String
-- `category2`: String
 
 ### Response
 
@@ -99,7 +98,6 @@
 - `id`: String
 - `password`: String
 - `category1`: String[optional]
-- `category2`: String[optional]
 
 ### Response
 
