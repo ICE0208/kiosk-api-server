@@ -6,6 +6,7 @@ import userRouter from "./routers/userRouter";
 import cors from "cors";
 import menuRouter from "./routers/menuRouter";
 import orderRouter from "./routers/orderRouter";
+import payRouter from "./routers/payRouter";
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.get("/user/login", (req, res) => {
 });
 
 // ! ----
+app.use("/pay", payRouter);
 app.use("/user", userRouter);
 app.use("/menu", menuRouter);
 app.use("/order", orderRouter);
