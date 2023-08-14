@@ -123,7 +123,6 @@ export const removeMenu = async (req, res) => {
     menu = await Menu.findOne({ name }).populate("owner");
     const menuId = menu._id;
     menu.owner.menus = menu.owner.menus.filter((_id) => {
-      console.log(_id);
       return String(_id) != String(menuId);
     });
     await menu.owner.save();
