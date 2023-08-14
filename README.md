@@ -119,7 +119,7 @@
 
 - `ok`: Boolean
 - `msg`: String
-- `data`: { `menus`: [ menu1, menu2, ... ] }
+- `data`: { `menu`: Menu }
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
