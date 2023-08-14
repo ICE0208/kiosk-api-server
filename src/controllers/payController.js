@@ -1,4 +1,5 @@
 import { async } from "regenerator-runtime";
+import fetch from "node-fetch";
 import "dotenv/config";
 
 export const readyPay = async (req, res) => {

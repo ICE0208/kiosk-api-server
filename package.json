@@ -25,7 +25,7 @@
     "morgan": "^1.10.0",
     "multer": "^1.4.2",
     "multer-s3": "^2.9.0",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^2.6.12",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
     "postcss": "^8.4.21",
