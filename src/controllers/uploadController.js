@@ -28,7 +28,7 @@ const storage = new Storage({
 });
 
 // Firebase 프로젝트의 기본 저장소 버킷 참조
-const bucket = storage.bucket("gs://kiosk-cba85.appspot.com");
+export const bucket = storage.bucket("gs://kiosk-cba85.appspot.com");
 
 // multer를 사용하여 파일을 메모리에 저장
 export const upload = multer({

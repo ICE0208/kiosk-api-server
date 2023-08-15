@@ -2,6 +2,8 @@ import { async } from "regenerator-runtime";
 import { getVerifiedUser } from "./userController";
 import Menu from "../models/Menu";
 import User from "../models/User";
+import { bucket } from "./uploadController";
+import path from "path";
 
 export const getCategoryMenu = async (req, res) => {
   const { id, password } = req.body;
@@ -116,6 +118,17 @@ export const removeMenu = async (req, res) => {
     return res.status(400).json({ ok: false, msg: "wrong id or pw" });
   }
   try {
+    const popuUser = await User.findOne({ id }).populate("menus");
+    let menuList = popuUser.menus;
+    menuList = menuList.filter((menu) => {
+      return String(menu.name) === String(name);
+    });
+    if (menuList.length == 0) {
+      return res
+        .status(400)
+        .json({ ok: false, msg: "There is not this menu." });
+    }
+
     let menu = await Menu.findOne({ name });
     if (!menu) {
       return res.status(400).json({ ok: false, msg: "no menu" });
@@ -126,6 +139,14 @@ export const removeMenu = async (req, res) => {
       return String(_id) != String(menuId);
     });
     await menu.owner.save();
+
+    // Firebase Storage에서 파일 삭제
+    const urlSplit = menu.imageURL.split("=");
+    const fileName = urlSplit[urlSplit.length - 1];
+    console.log(fileName);
+    const file = bucket.file(fileName);
+    await file.delete();
+
     await Menu.findByIdAndDelete(menuId);
     return res.status(200).json({ ok: true, msg: "good" });
   } catch (error) {
