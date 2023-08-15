@@ -6,10 +6,11 @@ import {
   getNameMenu,
   removeMenu,
 } from "../controllers/menuController";
+import { upload, uploadSave } from "../controllers/uploadController";
 
 const menuRouter = express.Router();
 
-menuRouter.post("/add", addMenu);
+menuRouter.post("/add", upload.single("imageFile"), uploadSave, addMenu);
 menuRouter.post("/remove", removeMenu);
 
 menuRouter.post("/category", getCategoryMenu);

@@ -7,6 +7,7 @@ import cors from "cors";
 import menuRouter from "./routers/menuRouter";
 import orderRouter from "./routers/orderRouter";
 import payRouter from "./routers/payRouter";
+import testRouter from "./controllers/uploadController";
 
 const app = express();
 
@@ -43,5 +44,7 @@ app.use("/pay", payRouter);
 app.use("/user", userRouter);
 app.use("/menu", menuRouter);
 app.use("/order", orderRouter);
+
+app.use("/test", testRouter);
 
 export default app;
