@@ -188,3 +188,40 @@
 - `data`: { `orders`: [ order1, order2, ... ] }
 
 <p align="right"><a href="#top">⬆️Top</a></p>
+
+# <span id="order"> 💰 매출 관련</span>
+
+## 일 매출 얻기 /order/dayOrder [`POST`]
+
+### Request
+
+- `id`: String
+- `password`: String
+- `year`: Number
+- `month`: Number
+- `day`: Number
+
+### Response
+
+- `ok`: Boolean
+- `msg`: String
+- `data`: { `count`: { `[menu1]`: Number, `[menu2]`: Number, ... }, `totalPrice`: Number }
+
+<p align="right"><a href="#top">⬆️Top</a></p>
+
+## 월 매출 얻기 /order/monthOrder [`POST`]
+
+### Request
+
+- `id`: String
+- `password`: String
+- `year`: Number
+- `month`: Number
+
+### Response
+
+- `ok`: Boolean
+- `msg`: String
+- `data`: { `count`: { `[menu1]`: Number, `[menu2]`: Number, ... }, `totalPrice`: Number }
+
+<p align="right"><a href="#top">⬆️Top</a></p>
