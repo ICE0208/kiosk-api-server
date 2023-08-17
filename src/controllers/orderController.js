@@ -152,6 +152,8 @@ export const dayOrder = async (req, res) => {
   // UTC 기준으로 하루를 더한 후 KST로 전환합니다.
   toDate.setDate(toDate.getDate() + 1);
 
+  console.log(`${fromDate} ~ ${toDate}`);
+
   try {
     const user = await User.findOne({ id })
       .populate({
