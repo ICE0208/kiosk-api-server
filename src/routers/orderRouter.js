@@ -4,6 +4,7 @@ import {
   changeOrderStatus,
   dayOrder,
   getAllOrder,
+  monthOrder,
   removeOrder,
 } from "../controllers/orderController";
 
@@ -13,6 +14,7 @@ orderRouter.post("/add", addOrder);
 orderRouter.post("/remove", removeOrder);
 orderRouter.post("/changeStatus", changeOrderStatus);
 orderRouter.post("/dayOrder", dayOrder);
+orderRouter.post("/monthOrder", monthOrder);
 
 orderRouter.post("/", getAllOrder);
 
