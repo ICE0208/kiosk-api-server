@@ -5,6 +5,7 @@
 [👤 유저 관련](#user)<br>
 [📜 메뉴 관련](#menu)<br>
 [🔔 주문 관련](#order)<br>
+[💰 매출 관련](#sales)<br>
 
 ---
 
@@ -189,7 +190,7 @@
 
 <p align="right"><a href="#top">⬆️Top</a></p>
 
-# <span id="order"> 💰 매출 관련</span>
+# <span id="sales"> 💰 매출 관련</span>
 
 ## 일 매출 얻기 /order/dayOrder [`POST`]
 
