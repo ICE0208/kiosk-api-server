@@ -145,14 +145,10 @@ export const dayOrder = async (req, res) => {
     return res.status(400).json({ ok: false, msg: "wrong id or pw", data: {} });
   }
 
-  // JavaScript의 Date 객체는 월을 0부터 시작하므로 -1을 해줘야 함
-  const fromDate = new Date(Date.UTC(year, month - 1, day)); // UTC 기준
+  const fromDate = new Date(Date.UTC(year, month - 1, day));
   const toDate = new Date(fromDate);
 
-  // UTC 기준으로 하루를 더한 후 KST로 전환합니다.
   toDate.setDate(toDate.getDate() + 1);
-
-  // console.log(`${fromDate} ~ ${toDate}`);
 
   try {
     const user = await User.findOne({ id })
@@ -175,28 +171,29 @@ export const dayOrder = async (req, res) => {
     let totalPrice = 0;
 
     filteredOrders.forEach((order) => {
-      // 완료 상태일 때만 되도록
       if (order.status != 1) {
         return;
       }
       if (order.menu) {
         const menuItem = order.menu;
         if (menuItem.name && menuItem.price) {
-          // 이름 카운트
           if (nameCount.has(menuItem.name)) {
             nameCount.set(menuItem.name, nameCount.get(menuItem.name) + 1);
           } else {
             nameCount.set(menuItem.name, 1);
           }
 
-          // 총 가격 계산
           totalPrice += menuItem.price;
         }
       }
     });
 
+    const sortedNameCount = new Map(
+      [...nameCount.entries()].sort((a, b) => b[1] - a[1])
+    );
+
     const response = {
-      count: Object.fromEntries(nameCount),
+      count: Object.fromEntries(sortedNameCount),
       totalPrice,
     };
 
@@ -223,13 +220,10 @@ export const monthOrder = async (req, res) => {
     return res.status(400).json({ ok: false, msg: "wrong id or pw", data: {} });
   }
 
-  // JavaScript의 Date 객체는 월을 0부터 시작하므로 -1을 해줘야 함x
-  const fromDate = new Date(Date.UTC(year, month - 1, 1)); // UTC 기준
+  const fromDate = new Date(Date.UTC(year, month - 1, 1));
   const toDate = new Date(
     Date.UTC(year + (month / 12 >= 1 ? 1 : 0), month % 12, 1)
   );
-
-  // console.log(`${fromDate} ~ ${toDate}`);
 
   try {
     const user = await User.findOne({ id })
@@ -252,28 +246,29 @@ export const monthOrder = async (req, res) => {
     let totalPrice = 0;
 
     filteredOrders.forEach((order) => {
-      // 완료 상태일 때만 되도록
       if (order.status != 1) {
         return;
       }
       if (order.menu) {
         const menuItem = order.menu;
         if (menuItem.name && menuItem.price) {
-          // 이름 카운트
           if (nameCount.has(menuItem.name)) {
             nameCount.set(menuItem.name, nameCount.get(menuItem.name) + 1);
           } else {
             nameCount.set(menuItem.name, 1);
           }
 
-          // 총 가격 계산
           totalPrice += menuItem.price;
         }
       }
     });
 
+    const sortedNameCount = new Map(
+      [...nameCount.entries()].sort((a, b) => b[1] - a[1])
+    );
+
     const response = {
-      count: Object.fromEntries(nameCount),
+      count: Object.fromEntries(sortedNameCount),
       totalPrice,
     };
 
