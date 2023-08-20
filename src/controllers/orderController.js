@@ -192,9 +192,11 @@ export const dayOrder = async (req, res) => {
       [...nameCount.entries()].sort((a, b) => b[1] - a[1])
     );
 
+    const formattedTotalPrice = totalPrice.toLocaleString("en-US");
+
     const response = {
       count: Object.fromEntries(sortedNameCount),
-      totalPrice,
+      totalPrice: formattedTotalPrice,
     };
 
     return res.status(200).json({ ok: true, msg: "good", data: response });
@@ -267,9 +269,11 @@ export const monthOrder = async (req, res) => {
       [...nameCount.entries()].sort((a, b) => b[1] - a[1])
     );
 
+    const formattedTotalPrice = totalPrice.toLocaleString("en-US");
+
     const response = {
       count: Object.fromEntries(sortedNameCount),
-      totalPrice,
+      totalPrice: formattedTotalPrice,
     };
 
     return res.status(200).json({ ok: true, msg: "good", data: response });
